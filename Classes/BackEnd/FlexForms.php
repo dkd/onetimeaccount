@@ -149,7 +149,10 @@ class FlexForms
         if (ExtensionManagementUtility::isLoaded('direct_mail')) {
             $availableFieldNames = array_merge($availableFieldNames, static::$fieldsFromDirectMail);
         }
-
+        //register additional fieldnames provided by custom extensions
+        if (isset($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['onetimeaccount']['additionalFeuserFieldnames']) && is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['onetimeaccount']['additionalFeuserFieldnames'])){
+            $availableFieldNames = array_merge($availableFieldNames, $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['onetimeaccount']['additionalFeuserFieldnames']);
+        }
         return array_unique($availableFieldNames);
     }
 
